@@ -109,3 +109,13 @@ Annmitra/
 - **Repository:** `https://github.com/addyanandinisingh-hash/Annmitra`
 - **Database Normalization:** Complies with **Fourth Normal Form (4NF)** across 17 decomposed relational entities.
 - **Branch:** `main` (No premature pushes without explicit approval).
+
+## Local Development
+
+This project uses React and Vite for the frontend.
+
+To start the frontend locally:
+
+1. Navigate to the frontend directory.
+2. Run `npm install`.
+3. Run `npm run dev`.
