@@ -1,121 +1,218 @@
 # Annmitra (अन्नमित्र) 🌾
-> **Farmer Direct Market Access Platform**  
-> *खेत से सीधा आपकी थाली तक • Direct from Farmers, Fair for Everyone*
+### Farmer Direct Market Access Platform
 
-Annmitra is a digital agricultural marketplace that connects farmers directly with retail consumers, local stores, and bulk buyers—eliminating predatory middlemen commissions, bringing transparency through explainable crop-price suggestions, and preserving full transactional integrity via an academic **Fourth Normal Form (4NF)** relational database.
+*खेत से सीधा आपकी थाली तक • Direct from Farmers, Fair for Everyone*
+
+Annmitra is a platform built to help farmers sell their crops directly to consumers, local shops, and bulk buyers.
+
+The main idea behind this project is to make selling and buying agricultural products easier and more transparent. Farmers can list their crops, set their own prices, and receive orders directly from buyers without depending heavily on middlemen.
+
+The platform also includes a crop price suggestion feature that helps farmers understand what a fair selling price could be. We have designed the database using **Fourth Normal Form (4NF)** to keep the data organised and reduce unnecessary duplication.
 
 ---
 
-## 🚀 Quick Start (View in VS Code & Chrome)
+## 🚀 How to Run the Project
 
-To run the development server:
+You can run Annmitra locally using VS Code and open it in Chrome.
+
+First, open the project folder in your terminal:
 
 ```bash
-# Navigate to the repository
 cd ~/AntigravityProjects/Annmitra
+```
 
-# Start the Vite development server
+Install the dependencies if you haven't already:
+
+```bash
+npm install
+```
+
+Start the development server:
+
+```bash
 npm run dev
 ```
 
-Alternatively, you can run directly inside the frontend folder:
+You can also start the frontend directly:
+
 ```bash
 cd ~/AntigravityProjects/Annmitra/frontend
+npm install
 npm run dev
 ```
 
-Then open your browser at:
-👉 **[http://localhost:5173](http://localhost:5173)**
+Once the server starts, open the following link in your browser:
+
+**http://localhost:5173**
 
 ---
 
-## 🌟 Implemented Features
+## 🌟 Features
 
-### 1. Modern Agriculture-Inspired Design System
-- High-contrast green-and-white theme (`#15803d`, `#166534`, `#f0fdf4`) with warm amber accents.
-- Responsive typography using **Plus Jakarta Sans** and **Outfit**.
-- Full mobile, tablet, and desktop layout responsiveness.
+### 1. Simple and Responsive Design
 
-### 2. Comprehensive Agricultural Marketplace
-- **20+ Realistic Crops** across 5 distinct categories:
-  - 🥦 **Fresh Vegetables:** Desi Hybrid Tomato, Nashik Red Onion, Agra Potato, Snowball Cauliflower, Cabbage, Red Carrot, Palak, Cucumber, Capsicum, Green Chilli, Bhindi, Matar, Garlic, Ginger.
-  - 🍎 **Orchard Fruits:** Shimla Royal Delicious Apple, Ratnagiri Alphonso Mango, Nagpur Oranges.
-  - 🌾 **Grains & Cereals:** Traditional Basmati Rice.
-  - 🫘 **Pulses & Dal:** Organic Unpolished Toor Dal.
-  - 🌶️ **Farm Spices:** Salem Pure Haldi Fingers.
-- Multi-facet live filtering by:
-  - Category pill tabs
-  - Instant text search (English & Hindi crop names, farmer names, locations)
-  - Mandi / Region filter (Nashik, Pune, Karnal, Ludhiana, Agra, Guntur, Shimla, etc.)
-  - Price brackets (Under ₹30, ₹30-₹60, ₹60-₹150, Above ₹150)
-  - Dynamic sorting (Price Low-High, Price High-Low, Rating, Stock)
+We have designed the website with a clean green-and-white theme inspired by agriculture.
 
-### 3. Interactive Kisan (Farmer) Portal & Dashboard
-- Stat Cards: Active Listings, Total Orders Received, Pending Orders, Accepted Orders, Total Sales.
-- **Incoming Orders Management:** Interactive **Accept** and **Reject** controls that update status in real time.
-- **Add New Crop Listing Form:** Interactive modal to create crop listings with name, Hindi translation, category, unit (kg, quintal, crate), price, and available stock.
-- **Python Price Intelligence Preview:** Displays market averages, recommended fair prices, and explainable economic trends.
+- Green and white colour scheme with warm amber accents.
+- Fonts used: Plus Jakarta Sans and Outfit.
+- Responsive layout for mobile phones, tablets, and desktops.
+- Easy navigation for both farmers and buyers.
 
-### 4. Interactive Buyer Portal & Dashboard
-- Stat Cards: Total Orders, Active Dispatches, Completed Purchases, Saved Addresses.
-- **Live Order Tracking Progress Bar:** Visual 4-step order lifecycle (`Placed` $\to$ `Accepted` $\to$ `Dispatched` $\to$ `Delivered`).
-- **Complete Purchase History Table:** Full audit record with a functional review submission modal.
+### 2. Agricultural Marketplace
 
-### 5. Authentication UI & Google OAuth Ready
-- Dedicated role switchers: Farmer vs. Buyer login.
-- **Google OAuth 2.0 Integration Button** with backend `.env` configuration readiness.
-- **One-Click Demo Login** buttons (`Log in as Demo Farmer` / `Log in as Demo Buyer`) for instant evaluation.
+The marketplace contains more than 20 crop listings across different categories.
+
+Some of the available crops include:
+
+- **Vegetables:** Tomato, onion, potato, cauliflower, cabbage, carrot, spinach, cucumber, capsicum, chilli, bhindi, peas, garlic, and ginger.
+- **Fruits:** Apples, Alphonso mangoes, and Nagpur oranges.
+- **Grains:** Traditional Basmati rice.
+- **Pulses:** Organic unpolished Toor Dal.
+- **Spices:** Salem turmeric fingers.
+
+Buyers can find crops using different filters:
+
+- Search by crop name, Hindi name, farmer name, or location.
+- Filter crops by category.
+- Select a mandi or region such as Nashik, Pune, Agra, Karnal, or Shimla.
+- Filter products according to price.
+- Sort products by price, rating, or available stock.
+
+This makes it easier for buyers to find the products they need.
+
+### 3. Farmer Dashboard
+
+The farmer dashboard helps farmers manage their products and orders in one place.
+
+Farmers can:
+
+- View their active crop listings.
+- Check the total number of orders received.
+- See pending and accepted orders.
+- Track their total sales.
+- Accept or reject incoming orders.
+- Add new crops with details such as name, Hindi name, category, unit, price, and available stock.
+
+The dashboard also includes a price suggestion section connected to our Python-based price intelligence service. It shows market averages, suggested prices, and the factors behind the recommendation.
+
+### 4. Buyer Dashboard
+
+The buyer dashboard allows customers to manage their orders and view their purchase history.
+
+It includes:
+
+- Total orders placed.
+- Orders currently being delivered.
+- Completed purchases.
+- Saved addresses.
+
+Buyers can also track their orders through four stages:
+
+**Placed → Accepted → Dispatched → Delivered**
+
+The purchase history keeps a record of previous orders, and buyers can submit reviews for products they have purchased.
+
+### 5. Login and Authentication
+
+The website has separate login options for farmers and buyers.
+
+We have also included:
+
+- Google login button with OAuth 2.0 configuration support.
+- Demo login for farmers.
+- Demo login for buyers.
+
+The demo login option makes it easier to explore the website during project evaluation without creating a new account.
 
 ---
 
-## 📂 Project Architecture
+## 📂 Project Structure
 
-```
+The project is divided into different components and folders to make the code easier to manage.
+
+```text
 Annmitra/
-├── frontend/                     # React.js SPA (Vite + React 18)
-│   ├── public/                   # Static icons and assets
+│
+├── frontend/
+│   ├── public/
 │   ├── src/
-│   │   ├── assets/               # SVGs and styling assets
-│   │   ├── components/           # Reusable UI components
-│   │   │   ├── Navbar.jsx        # Responsive navigation with role switcher
-│   │   │   ├── Footer.jsx        # Platform footer and kisan helpline
-│   │   │   ├── Hero.jsx          # Hero search banner
-│   │   │   ├── CropCard.jsx      # Agricultural product card
-│   │   │   ├── CropDetailModal.jsx # Direct ordering modal
-│   │   │   └── AuthModal.jsx     # Google OAuth & role-based sign-in
+│   │   ├── assets/
+│   │   ├── components/
+│   │   │   ├── Navbar.jsx
+│   │   │   ├── Footer.jsx
+│   │   │   ├── Hero.jsx
+│   │   │   ├── CropCard.jsx
+│   │   │   ├── CropDetailModal.jsx
+│   │   │   └── AuthModal.jsx
+│   │   │
 │   │   ├── data/
-│   │   │   └── mockData.js       # Realistic agricultural dataset
+│   │   │   └── mockData.js
+│   │   │
 │   │   ├── pages/
-│   │   │   ├── Home.jsx          # Landing page
-│   │   │   ├── Marketplace.jsx   # Filterable vegetable marketplace
-│   │   │   ├── About.jsx         # Architecture & 4NF evaluation
-│   │   │   ├── FarmerDashboard.jsx # Kisan management portal
-│   │   │   └── BuyerDashboard.jsx  # Consumer tracking dashboard
+│   │   │   ├── Home.jsx
+│   │   │   ├── Marketplace.jsx
+│   │   │   ├── About.jsx
+│   │   │   ├── FarmerDashboard.jsx
+│   │   │   └── BuyerDashboard.jsx
+│   │   │
 │   │   ├── styles/
-│   │   │   └── index.css         # Agriculture design system
-│   │   ├── App.jsx               # Application root & router
-│   │   └── main.jsx              # React DOM entrypoint
+│   │   │   └── index.css
+│   │   │
+│   │   ├── App.jsx
+│   │   └── main.jsx
+│   │
 │   ├── package.json
 │   └── vite.config.js
 │
-├── .gitignore                    # Secrets & node_modules exclusion
-├── package.json                  # Root convenience scripts
-└── README.md                     # Project documentation
+├── .gitignore
+├── package.json
+└── README.md
 ```
+
+### Technologies Used
+
+- **Frontend:** React.js, Vite, HTML, CSS, JavaScript
+- **Backend:** Node.js and Express
+- **Database:** Relational database designed using 4NF principles
+- **Price Intelligence:** Python
+- **Authentication:** Google OAuth 2.0
 
 ---
 
-## 🎓 Academic Evaluation Notes
-- **Repository:** `https://github.com/addyanandinisingh-hash/Annmitra`
-- **Database Normalization:** Complies with **Fourth Normal Form (4NF)** across 17 decomposed relational entities.
-- **Branch:** `main` (No premature pushes without explicit approval).
+## 🎓 Project Details
+
+**Project Name:** Annmitra (अन्नमित्र)
+
+**Project Type:** Farmer Direct Market Access Platform
+
+**GitHub Repository:**  
+https://github.com/addyanandinisingh-hash/Annmitra
+
+**Branch:** `main`
+
+### Database Design
+
+One of the important parts of this project is the database design.
+
+We have organised the database into **17 relational entities** and followed Fourth Normal Form (4NF) principles. The purpose is to keep different types of information separate, avoid unnecessary duplication, and maintain consistency between farmers, buyers, crops, orders, and other records.
+
+The database structure is also part of our academic evaluation, so we have focused on making it properly organised and easy to explain.
+
+---
 
 ## Local Development
 
-This project uses React and Vite for the frontend.
+Annmitra is built using React and Vite for the frontend.
 
-To start the frontend locally:
+To run the project:
 
-1. Navigate to the frontend directory.
-2. Run `npm install`.
-3. Run `npm run dev`.
+1. Clone or download the repository.
+2. Open the project in VS Code.
+3. Go to the frontend folder.
+4. Install the required packages using `npm install`.
+5. Start the server using `npm run dev`.
+6. Open the local URL shown in the terminal.
+
+The project is currently being developed and tested locally.
+
+Our goal with Annmitra is to make it easier for farmers to reach buyers directly while giving buyers a simple and transparent way to purchase fresh agricultural products.
