@@ -34,6 +34,7 @@ export default function Hero({ onSearchSubmit, onQuickCategory, openAuthModal, s
 
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <div style={{ maxWidth: '820px', margin: '0 auto', textAlign: 'center' }}>
+
           {/* Top Pill */}
           <div style={{ display: 'inline-flex', marginBottom: '1.25rem' }}>
             <span className="badge badge-green" style={{ padding: '0.4rem 0.95rem', fontSize: '0.82rem' }}>
@@ -49,7 +50,7 @@ export default function Hero({ onSearchSubmit, onQuickCategory, openAuthModal, s
             letterSpacing: '-0.02em',
             fontWeight: 800
           }}>
-            खेत से सीधा आपकी थाली तक
+            Kisan se rishta, bharose ka vaada
           </h1>
 
           <p style={{
@@ -193,6 +194,7 @@ export default function Hero({ onSearchSubmit, onQuickCategory, openAuthModal, s
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </section>
