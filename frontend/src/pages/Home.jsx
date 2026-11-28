@@ -57,7 +57,16 @@ export default function Home({
               <div
                 key={cat.id}
                 className="card"
+                role="button"
+                tabIndex={0}
+                aria-label={`Browse ${cat.name} crops`}
                 onClick={() => handleCategoryClick(cat.id)}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    handleCategoryClick(cat.id);
+                  }
+                }}
                 style={{
                   padding: '1.5rem 1rem',
                   textAlign: 'center',
