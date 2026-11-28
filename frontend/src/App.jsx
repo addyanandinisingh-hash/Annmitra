@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -8,11 +8,12 @@ import FarmerDashboard from './pages/FarmerDashboard';
 import BuyerDashboard from './pages/BuyerDashboard';
 import CropDetailModal from './components/CropDetailModal';
 import AuthModal from './components/AuthModal';
+import { useAuth } from './context/AuthContext';
 import { CROPS, DEMO_BUYER } from './data/mockData';
 
 export default function App() {
+  const { user: currentUser, loading: authLoading } = useAuth();
   const [currentPage, setCurrentPage] = useState('home');
-  const [currentUser, setCurrentUser] = useState(null); // null, farmer object, buyer object
   const [crops, setCrops] = useState(CROPS);
   const [buyerOrders, setBuyerOrders] = useState(DEMO_BUYER.orders);
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -36,14 +37,24 @@ export default function App() {
     setAuthModalState({ isOpen: false, role: 'buyer' });
   };
 
-  const handleLoginSuccess = (user) => {
-    setCurrentUser(user);
-    if (user.role === 'farmer') {
+  // Redirect to the right dashboard after login/registration
+  const handleLoginSuccess = (loggedInUser) => {
+    if (loggedInUser?.role === 'farmer') {
       setCurrentPage('farmer-dashboard');
     } else {
       setCurrentPage('buyer-dashboard');
     }
   };
+
+  // Route protection: if a user logs out or their session expires while on a dashboard,
+  // redirect them back to home safely.
+  useEffect(() => {
+    if (!authLoading && !currentUser) {
+      if (currentPage === 'farmer-dashboard' || currentPage === 'buyer-dashboard') {
+        setCurrentPage('home');
+      }
+    }
+  }, [authLoading, currentUser, currentPage]);
 
   const handleSearchFromHero = (query) => {
     setSearchQuery(query);
@@ -79,20 +90,34 @@ export default function App() {
       return c;
     }));
 
-    // If not logged in as buyer, set user as buyer
-    if (!currentUser) {
-      setCurrentUser({
-        ...DEMO_BUYER,
-        name: buyerName,
-        phone: buyerPhone
-      });
-    }
-
+    // If not logged in as buyer, prompt login instead of faking a user
     setSelectedCrop(null);
-    showToast(`Order #${newOrderId} placed successfully! Direct confirmation dispatched to ${crop.farmer.name}.`);
-    setCurrentPage('buyer-dashboard');
+    showToast(`Order #${newOrderId} placed! Direct confirmation dispatched to ${crop.farmer.name}.`);
+    if (currentUser?.role === 'buyer') {
+      setCurrentPage('buyer-dashboard');
+    } else {
+      openAuthModal('buyer');
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  // While checking /api/auth/me on initial load, show a clean loading screen
+  if (authLoading) {
+    return (
+      <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '100vh',
+        gap: '0.75rem',
+        color: 'var(--primary-800)'
+      }}>
+        <span style={{ fontSize: '2.5rem' }}>🌱</span>
+        <p style={{ fontWeight: 600 }}>Checking your Annmitra session...</p>
+      </div>
+    );
+  }
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
@@ -100,8 +125,6 @@ export default function App() {
       <Navbar
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
-        currentUser={currentUser}
-        setCurrentUser={setCurrentUser}
         openAuthModal={openAuthModal}
         showToast={showToast}
       />
@@ -139,22 +162,46 @@ export default function App() {
         )}
 
         {currentPage === 'farmer-dashboard' && (
-          <FarmerDashboard
-            currentUser={currentUser}
-            crops={crops}
-            setCrops={setCrops}
-            showToast={showToast}
-          />
+          currentUser?.role === 'farmer' ? (
+            <FarmerDashboard
+              currentUser={currentUser}
+              crops={crops}
+              setCrops={setCrops}
+              showToast={showToast}
+            />
+          ) : (
+            <div className="container" style={{ padding: '4rem 1rem', textAlign: 'center' }}>
+              <h2>🔒 Farmer Access Required</h2>
+              <p style={{ color: 'var(--text-muted)', margin: '0.75rem 0 1.5rem' }}>
+                Please sign in with a Farmer account to view the Kisan Dashboard.
+              </p>
+              <button className="btn btn-primary" onClick={() => openAuthModal('farmer')}>
+                Sign In as Farmer
+              </button>
+            </div>
+          )
         )}
 
         {currentPage === 'buyer-dashboard' && (
-          <BuyerDashboard
-            currentUser={currentUser}
-            buyerOrders={buyerOrders}
-            setBuyerOrders={setBuyerOrders}
-            setCurrentPage={setCurrentPage}
-            showToast={showToast}
-          />
+          currentUser?.role === 'buyer' ? (
+            <BuyerDashboard
+              currentUser={currentUser}
+              buyerOrders={buyerOrders}
+              setBuyerOrders={setBuyerOrders}
+              setCurrentPage={setCurrentPage}
+              showToast={showToast}
+            />
+          ) : (
+            <div className="container" style={{ padding: '4rem 1rem', textAlign: 'center' }}>
+              <h2>🔒 Buyer Access Required</h2>
+              <p style={{ color: 'var(--text-muted)', margin: '0.75rem 0 1.5rem' }}>
+                Please sign in with a Buyer account to view the Buyer Dashboard.
+              </p>
+              <button className="btn btn-accent" onClick={() => openAuthModal('buyer')}>
+                Sign In as Buyer
+              </button>
+            </div>
+          )
         )}
       </main>
 

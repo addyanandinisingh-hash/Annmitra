@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
+import { useAuth } from '../context/AuthContext';
 
 export default function Navbar({
   currentPage,
   setCurrentPage,
-  currentUser,
-  setCurrentUser,
   openAuthModal,
   showToast
 }) {
+  const { user: currentUser, logout } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const handleLogout = () => {
-    setCurrentUser(null);
+  const handleLogout = async () => {
+    await logout();
     setCurrentPage('home');
     showToast('Logged out successfully');
   };
